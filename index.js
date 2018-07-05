@@ -16,6 +16,7 @@ const logger = (request, response, next) => {
   next()
 }
 
+app.use(express.static('build'))
 app.use(logger)
 
 //morgan.token('content', function (req, res) {
