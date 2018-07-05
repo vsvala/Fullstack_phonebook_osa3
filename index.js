@@ -2,28 +2,28 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-//const morgan = require('morgan')
+const morgan = require('morgan')
 const cors = require('cors')
 
 app.use(cors())
 app.use(bodyParser.json())
 
-const logger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
-  console.log('---')
-  next()
-}
+// const logger = (request, response, next) => {
+//   console.log('Method:', request.method)
+//   console.log('Path:  ', request.path)
+//   console.log('Body:  ', request.body)
+//   console.log('---')
+//   next()
+// }
 
 app.use(express.static('build'))
-app.use(logger)
+//app.use(logger)
 
-//morgan.token('content', function (req, res) {
-// return JSON.stringify(req.body)
-//})
-//app.use(morgan(':method :url :content :status :res[content-length] - :response-time ms')
-//)
+morgan.token('content', function (req, res) {
+return JSON.stringify(req.body)
+})
+app.use(morgan(':method :url :content :status :res[content-length] - :response-time ms')
+)
 
 
 let persons= [
