@@ -27,6 +27,27 @@ return JSON.stringify(req.body)
 app.use(morgan(':method :url :content :status :res[content-length] - :response-time ms')
 )
 
+// let persons= [
+//   {
+//     name: "Martti Tienari",
+//     num: "040-12345678",
+//     important: true,
+//     id: 1
+//   },
+//   {
+//     name: "Arto Järvinen",
+//     num: "040-123456",
+//     id: 2,
+//     important: true
+//   },
+//   {
+//     name: "Lea Kutvonen",
+//     num: "300",
+//     important: true,
+//     id: 3
+//   }
+// ]
+
 const formatPerson = (person) => {
   return {
     name: person.name,
@@ -88,8 +109,9 @@ app.post('/api/persons', (request, response) => {
 
 person
   .save()
-  .then(savedPerson=> {
-   response.json(formatPerson(savedPerson)) 
+  .then(formatPerson)
+  .then(savedAndFormattedPerson=> {
+   response.json(savedAndFormattedPerson) 
 })
 .catch(error => {
   console.log(error)
@@ -115,18 +137,18 @@ app.get('/api/persons', (req, res) => {
 })
 
 
-
 app.put('/api/persons/:id', (request, response) => {
   const body = request.body
 
   const person = {
     name: body.name,
-    num: body.num,
-   // important: body.important
+    num: body.num
+    //important: body.important
+
   }
 
-  Person
-    .findByIdAndUpdate(request.params.id, person, { new: true } )
+  Person 
+    .findByIdAndUpdate(request.params.id, person, { new: true })
     .then(updatedPerson=> {
       response.json(formatPerson(updatedPerson))
     })
@@ -142,7 +164,7 @@ const error = (request, response) => {
 app.use(error)
 
 
-const PORT =process.env.PORT || 3001
+const PORT =process.env.PORT || 3004
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

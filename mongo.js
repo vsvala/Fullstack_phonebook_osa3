@@ -10,18 +10,18 @@ const Person = mongoose.model('Person', {
   important: Boolean
 })
 
-const person = new Person({
-  name: 'Niina Männikkö',
-  num: '2098777999',
-  important: true
-})
+// const person = new Person({
+//   name: 'Niina Männikkö',
+//   num: '2098777999',
+//   important: true
+// })
 
-person
-  .save()
-  .then(response => {
-    console.log('persom saved!')
-    mongoose.connection.close()
-  })
+// person
+//   .save()
+//   .then(response => {
+//     console.log('person saved!')
+//     mongoose.connection.close()
+//   })
 
 Person
   .find({})
