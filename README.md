@@ -1,2 +1,2 @@
-Linkki Herokun [phonebook sovellukseen](https://fullstacko3.herokuapp.com/api/persons)
+Linkki Herokun [phonebook sovellukseen](https://limitless-island-73610.herokuapp.com)
 
